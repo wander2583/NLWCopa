@@ -16,12 +16,22 @@ model Pool {
     title String
     code String @unique
     createAt DateTime @default(now())
+    ownerId String?
+
+    participants Participant[]
+    owner User? @relation(fields: [ownerId], references: [id])
 }
 
 model Participant {
   id String @id @default(cuid())
+  userId String
+  poolId String
 
   guesses Guess[]
+  user User @relation(fields: [userId], references: [id])
+  pool Pool @relation(fields: [poolId], references: [id])
+
+  @@unique([userId, poolId])
 }
 
 model User {
@@ -29,7 +39,10 @@ model User {
     name String
     email String @unique
     avatarUrl String?
-    createAt DateTime @default(now()) //parado em 15:53 do video 2
+    createAt DateTime @default(now())
+
+    participatingAt Participant[]
+    ownPools Pool[]
 }
 
 model Game {
