@@ -19,22 +19,36 @@ model Pool {
 }
 
 model Participant {
-id String @id @default(cuid())
+  id String @id @default(cuid())
+
+  guesses Guess[]
 }
 
 model User {
-id String @id @default(cuid())
-name String
-email String @unique
-avatarUrl String?
-createAt DateTime @default(now())
+  id String @id @default(cuid())
+    name String
+    email String @unique
+    avatarUrl String?
+    createAt DateTime @default(now()) //parado em 15:53 do video 2
 }
 
 model Game {
-id String @id @default(cuid())
-date DateTime
+  id String @id @default(cuid())
+    date DateTime
+    firstTeamCountryCode String
+    secondTeamCountryCode String
+
+    guesses Guess[]
 }
 
 model Guess {
-id String @id @default(cuid())
+  id String @id @default(cuid())
+  firsTeamPoints Int
+  secondTeamPoints Int
+  createAt DateTime @default(now())
+  gameId String
+  participantId String
+
+  participant Participant @relation(fields: [participantId], references: [id])
+  game Game @relation(fields: [gameId], references: [id])
 }
