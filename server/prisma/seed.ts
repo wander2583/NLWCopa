@@ -1,13 +1,13 @@
-import { PrismaClient } from "@prisma/client"
+import { PrismaClient } from '@prisma/client'
 
 const prisma = new PrismaClient()
 
-async function main(){
+async function main() {
 
   const user = await prisma.user.create({
     data: {
       name: 'Wander',
-      email: 'wanderlei@gmail.com',
+      email: 'wanderleigmailcom',
       avatarUrl: 'https://github.com/wander2583.png',
     }
   })
