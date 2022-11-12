@@ -8,6 +8,6 @@
   box-sizing: border-box;
 }
 
-h1 {
-  color: rgb(234, 234, 234, 0.6);
+body {
+  -webkit-font-smoothing: antialiased;
 }
